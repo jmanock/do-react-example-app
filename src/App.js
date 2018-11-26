@@ -6,7 +6,7 @@ import Bikes from './components/Bikes';
 import Contact from './components/Contact';
 import Cars from './components/Cars';
 import SmallTown from './components/SmallTown';
-import ThingsToDo from './components/ThingsToDo';
+import Events from './components/Events';
 import {Switch, BrowserRouter, Route} from 'react-router-dom';
 import './App.css';
 
@@ -23,7 +23,7 @@ class App extends Component {
             <Route path='/Bikes' component={Bikes} />
             <Route path='/Cars' component={Cars} />
             <Route path='/SmallTown' component={SmallTown} />
-            <Route path='/ThingsToDo' component={ThingsToDo} />
+            <Route path='/Events' component={Events} />
           </Switch>
         </div>
       </BrowserRouter>
