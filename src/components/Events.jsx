@@ -1,10 +1,11 @@
 import React from 'react';
 import Calendar from './Calendar';
+import EventCalendar from './EventCalendar';
 
 const Events = () =>{
   return(
     <div className='container'>
-      <h1>Events</h1>
+      <EventCalendar />
       <Calendar />
     </div>
   );

@@ -93,13 +93,11 @@ class Calendar extends Component{
   }
 
   render(){
-    
-    console.log(dateFns.isToday(new Date()));
     return(
       <div className='calendar'>
         {this.renderHeader()}
         {this.renderDays()}
-
+        {this.renderCells()}
       </div>
     );
   }
