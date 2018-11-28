@@ -1,342 +1,910 @@
 import React, {Component} from 'react';
+import moment from 'moment';
+//
+// class EventCalendar extends Component{
+//   constructor(props){
+//     super(props);
+//     this.cachedEvents = JSON.parse(localStorage.getItem('eventData'));
+//     this.state = {
+//       data:this.cachedEvents
+//     };
+//   }
+//
+//   componentDidMount(){
+//     const today = moment();
+//
+//     function Calendar(selector, events){
+//       this.el = document.querySelector(selector);
+//       this.events = events;
+//       this.current = moment().date(1);
+//       this.draw();
+//       var current = document.querySelector('.today');
+//       if(current){
+//         var self = this;
+//         window.setTimeout(function(){
+//           self.openDay(current);
+//         }, 500);
+//       }
+//       this.drawLegend();
+//     }
+//
+//     Calendar.prototype.draw = function(){
+//       this.drawHeader();
+//       this.drawMonth();
+//     };
+//
+//     Calendar.prototype.drawHeader = function(){
+//       var self = this;
+//       if(!this.header){
+//         this.header = createElement('div', 'header');
+//         this.header.className = 'header';
+//         this.title = createElement('h1');
+//
+//         var right = createElement('div', 'right');
+//         right.addEventListener('click', function(){
+//           self.nextMonth();
+//         });
+//
+//         var left = createElement('div', 'left');
+//         left.addEventListener('click', function(){
+//           self.prevMonth();
+//         });
+//
+//         this.header.appendChild(this.title);
+//         this.header.appendChild(right);
+//         this.header.appendChild(left);
+//         this.el.appendChild(this.header);
+//       }
+//       this.title.innerHTML = this.current.format('MMMM YYYY');
+//     };
+//
+//     Calendar.prototype.drawMonth = function(){
+//       var self = this;
+//       this.events.forEach(function(ev){
+//         ev.date = moment(ev.eventTime, 'YYY-MM-DD hh:mm:ss');
+//       });
+//
+//       if(this.month){
+//         this.oldMonth = this.month;
+//         this.oldMonth.className = 'month out ' + (self.next ? 'next' : 'prev');
+//         this.oldMonth.addEventListener('webkitAnimationEnd', function(){
+//           self.oldMonth.parentNode.removeChild(self.oldMonth);
+//           self.month = createElement('div', 'month');
+//           self.backFill();
+//           self.currentMonth();
+//           self.fowardFill();
+//           self.el.appendChild(self.month);
+//           window.setTimeout(function(){
+//             self.month.className = 'month in ' + (self.next ? 'next' : 'prev');
+//           }, 16);
+//         });
+//       }else {
+//         this.month = createElement('div', 'month');
+//         this.el.appendChild(this.month);
+//         this.backFill();
+//         this.currentMonth();
+//         this.fowardFill();
+//         this.month.className = 'month new';
+//       }
+//     };
+//
+//     Calendar.prototype.backFill = function(){
+//       var clone = this.current.clone();
+//       var dayOfWeek = clone.day();
+//
+//       if(!dayOfWeek){
+//         return;
+//       }
+//
+//       clone.subtract('days', dayOfWeek + 1);
+//
+//       for(var i = dayOfWeek; i > 0; i--){
+//         this.drawDay(clone.add('days', 1));
+//       }
+//     };
+//
+//     Calendar.prototype.fowardFill = function(){
+//       var clone = this.current.clone().add('months', 1).subtract('days', 1);
+//       var dayOfWeek = clone.day();
+//
+//       if(dayOfWeek === 6){
+//         return;
+//       }
+//
+//       for(var i = dayOfWeek; i < 6; i++){
+//         this.drawDay(clone.add('days', 1));
+//       }
+//     };
+//
+//     Calendar.prototype.currentMonth = function(){
+//       var clone = this.current.clone();
+//
+//       while(clone.month() === this.current.month()){
+//         this.drawDay(clone);
+//         clone.add('days', 1);
+//       }
+//     };
+//
+//     Calendar.prototype.getWeek = function(day){
+//       if(!this.week || day.day() === 0){
+//         this.week = createElement('div', 'week');
+//         this.month.appendChild(this.week);
+//       }
+//     };
+//
+//     Calendar.prototype.drawDay = function(day){
+//       var self = this;
+//       this.getWeek(day);
+//       var outer = createElement('div', this.getDayClass(day));
+//       outer.addEventListener('click', function(){
+//         self.openDay(this);
+//       });
+//
+//       var name = createElement('div', 'day-name', day.format('ddd'));
+//       var number = createElement('div', 'day-number', day.format('DD'));
+//       var events = createElement('div', 'day-events');
+//       this.drawEvents(day,events);
+//
+//       outer.appendChild(name);
+//       outer.appendChild(number);
+//       outer.appendChild(events);
+//       this.week.appendChild(outer);
+//     };
+//
+//     Calendar.prototype.drawEvents = function(day,element){
+//       if(day.month() === this.current.month()){
+//         var todaysEvents = this.events.reduce(function(memo,ev){
+//           if(ev.data.isSame(day,'day')){
+//             memo.push(ev);
+//           }
+//           return memo;
+//         },[]);
+//
+//         todaysEvents.forEach(function(ev){
+//           var evSpan = createElement('span', ev.color);
+//           element.appendChild(evSpan);
+//         });
+//       }
+//     };
+//
+//     Calendar.prototype.getDayClass = function(day){
+//       classes = ['day'];
+//       if(day.month() !== this.current.month()){
+//         classes.push('other');
+//       }else if(today.isSame(day, 'day')){
+//         classes.push('today');
+//       }
+//       return classes.join(' ');
+//     };
+//
+//     Calendar.prototype.openDay = function(el){
+//       var details, arrow;
+//       var dayNumber = +el.querySelectorAll('.day-number')[0].innerText || +el.querySelectorAll('.day-number')[0].textContent;
+//       var day = this.current.clone().date(dayNumber);
+//       var currentOpened = document.querySelector('.details');
+//
+//       if(currentOpened && currentOpened.parentNode === el.parentNode){
+//         details = currentOpened;
+//         arrow = document.querySelector('.arrow');
+//       }else{
+//         if(currentOpened){
+//           currentOpened.addEventListener('webkitAnimationEnd', function(){
+//             currentOpened.parentNode.removeChild(currentOpened);
+//           });
+//           currentOpened.addEventListener('oanimationend', function(){
+//             currentOpened.parentNode.removeChild(currentOpened);
+//           });
+//           currentOpened.addEventListener('msAnimationEnd', function(){
+//             currentOpened.parentNode.removeChild(currentOpened);
+//           });
+//           currentOpened.addEventListener('animationend', function(){
+//             currentOpened.parentNode.removeChild(currentOpened);
+//           });
+//           currentOpened.className = 'details out';
+//         }
+//         details = createElement('div', 'details in');
+//         var arrow = createElement('div', 'arrow');
+//         details.appendChild(arrow);
+//         el.parentNode.appendChild(details);
+//       }
+//       var todaysEvents = this.events.reduce(function(memo, ev){
+//         if(ev.date.isSame(day, 'day')){
+//           memo.push(ev);
+//         }
+//         return memo;
+//       }, []);
+//
+//       this.renderEvents(todaysEvents, details);
+//       arrow.style.left = el.offsetLeft - el.parentNode.offsetLeft + 27 + 'px';
+//     };
+//
+//     Calendar.prototype.renderEvents = function(events, ele){
+//       var currentWrapper = ele.querySelector('.events');
+//       var wrapper = createElement('div', 'events in' + (currentWrapper ? ' new' : ''));
+//       //ReactDOM.render(<AddEvent />, wrapper);
+//       events.forEach(function(ev){
+//         var div = createElement('div', 'event');
+//         var square = createElement('span', '', ev.eventName);
+//
+//         div.appendChild(square);
+//         div.appendChild(span);
+//         wrapper.appendChild(div);
+//       });
+//
+//       if(!events.length){
+//         var div = createElement('div', 'event empty');
+//         var span = createElement('span', '', 'No Events');
+//
+//         div.appendChild(span);
+//         wrapper.appendChild(div);
+//       }
+//
+//       if(currentWrapper){
+//         currentWrapper.className='events out';
+//         currentWrapper.addEventListener('webkitAnimationEnd', function(){
+//           currentWrapper.parentNode.removeChild(currentWrapper);
+//           ele.appendChild(wrapper);
+//         });
+//         currentWrapper.addEventListener('oanimationend', function(){
+//           currentWrapper.parentNode.removeChild(currentWrapper);
+//           ele.appendChild(wrapper);
+//         });
+//         currentWrapper.addEventListener('msAnimationEnd', function(){
+//           currentWrapper.parentNode.removeChild(currentWrapper);
+//           ele.appendChild(wrapper);
+//         });
+//         currentWrapper.addEventListener('animationend', function(){
+//           currentWrapper.parentNode.removeChild(currentWrapper);
+//           ele.appendChild(wrapper);
+//         });
+//       }else{
+//         ele.appendChild(wrapper);
+//       }
+//     };
+//
+//     Calendar.prototype.drawLegend = function(){
+//       var legend = createElement('div', 'legend');
+//       var calendars = this.events.map(function(e){
+//         return e.calendar + '|' + e.color;
+//       }).reduce(function(memo, e){
+//         if(memo.indexOf(e) === -1){
+//           memo.push(e);
+//         }
+//         return memo;
+//       }, []).forEach(function(e){
+//         var parts = e.split('|');
+//         var entry = createElement('span', 'entry ' + parts[1], parts[0]);
+//         legend.appendChild(entry);
+//       });
+//       this.el.appendChild(legend);
+//     };
+//
+//     Calendar.prototype.nextMonth = function(){
+//       this.current.add('months', 1);
+//       this.next = true;
+//       this.draw();
+//     };
+//
+//     Calendar.prototype.prevMonth = function(){
+//       this.current.subtract('months', 1);
+//       this.next = false;
+//       this.draw();
+//     };
+//
+//     window.Calendar = Calendar;
+//
+//     function createElement(tagName, className, innerText){
+//       var ele = document.createElement(tagName);
+//       if(className){
+//         ele.className = className;
+//       }
+//       if(innerText){
+//         ele.innderText = ele.textContent = innerText;
+//       }
+//       return ele;
+//     }
+//     var data = [
+//       {
+//         eventName:'Something Fun',
+//         calendar:'Work',
+//         color:'orange',
+//         eventTime:'2018-11-27 08:30:00'
+//       },
+//       {
+//         eventName:'Something Else Fun',
+//         calendar:'Work',
+//         color:'blue',
+//         eventTime:'2018-11-28 09:30'
+//       },
+//       {
+//         eventName:'Something Stupid',
+//         calendar:'Sport',
+//         color:'green',
+//         eventTime:'2018-12-1 10:20'
+//       }
+//     ];
+//
+//     function addDate(ev){}
+//     var calendar = new Calendar('#calendar', data);
+//   }
+//   render(){
+//     return(
+//       <h1>HiFriend</h1>
+//     );
+//   }
+// };
+//
+// export default EventCalendar;
 
-class EventCalendar extends Component{
-  state = {
-    data:this.cachedEvents
+
+class AddEvent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showHide: "none"
+    };
+  }
+
+  open = () => {
+    this.setState({
+      showHide: "block"
+    });
   };
 
-  componentDidMount(){
+  close = () => {
+    this.setState({
+      showHide: "none"
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <button
+          style={{
+            position: "absolute",
+            top: 0,
+            right: 0,
+            margin: 5
+          }}
+          onClick={this.open}
+        >
+          Add
+        </button>
+        <div
+          id="myModal"
+          className="modal"
+          style={{
+            display: this.state.showHide,
+            position: "absolute",
+            zindex: 1,
+            left: 0,
+            top: 0,
+            width: "100%",
+            height: "100%",
+            overflow: "auto",
+            backgroundcolor: "rgb(0,0,0)",
+            backgroundcolor: "rgba(0,0,0,0.4)"
+          }}
+        >
+          <div
+            className="modal-content"
+            style={{
+              padding: 5,
+              width: "100%",
+              height: "100%",
+              position: "absolute"
+            }}
+          >
+            <span
+              onClick={this.close}
+              className="close"
+              style={{
+                color: "#aaa",
+                float: "right",
+                fontsize: 28,
+                fontweight: "bold"
+              }}
+            >
+              &times;
+            </span>
+            To be completed.
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+class EventCalendar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.cachedEvents = JSON.parse(localStorage.getItem("eventData"));
+    this.state = {
+      data: this.cachedEvents
+    };
+  }
+
+  componentDidMount() {
     const today = moment();
 
-    function Calendar(selector, events){
+    function Calendar(selector, events) {
       this.el = document.querySelector(selector);
       this.events = events;
       this.current = moment().date(1);
       this.draw();
-      var current = document.querySelector('.today');
-      if(current){
+      var current = document.querySelector(".today");
+      if (current) {
         var self = this;
-        window.setTimeout(function(){
+        window.setTimeout(function() {
           self.openDay(current);
-        },500);
+        }, 500);
       }
       this.drawLegend();
     }
-    Calendar.prototype.draw = function(){
-      this.drawHeader();
-      this.drawMonth();
-    };
-    Calendar.prototype.drawHeader = function(){
-      var self = this;
-      if(!this.header){
-        this.header = createElement('div', 'header');
-        this.header.className='header';
-        this.title = createElement('h1');
 
-        var right = createElement('div', 'right');
-        right.addEventListener('click', function(){
+    Calendar.prototype.draw = function() {
+      //Create Header
+      this.drawHeader();
+
+      //Draw Month
+      this.drawMonth();
+
+      //this.drawLegend();
+    };
+
+    Calendar.prototype.drawHeader = function() {
+      var self = this;
+      if (!this.header) {
+        //Create the header elements
+        this.header = createElement("div", "header");
+        this.header.className = "header";
+
+        this.title = createElement("h1");
+
+        var right = createElement("div", "right");
+        right.addEventListener("click", function() {
           self.nextMonth();
         });
 
-        var left = createElement('div', 'left');
-        left.addEventListener('click', function(){
+        var left = createElement("div", "left");
+        left.addEventListener("click", function() {
           self.prevMonth();
         });
 
+        //Append the Elements
         this.header.appendChild(this.title);
         this.header.appendChild(right);
         this.header.appendChild(left);
         this.el.appendChild(this.header);
       }
 
-      this.title.innerHTML = this.current.format('MMMM YYYY');
+      this.title.innerHTML = this.current.format("MMMM YYYY");
     };
 
-    Calendar.prototype.drawMonth = function(){
+    Calendar.prototype.drawMonth = function() {
       var self = this;
 
-      this.events.forEach(function(ev){
-        ev.date = moment(ev.eventTime, 'YYYY-MM-DD hh:mm:ss');
+      this.events.forEach(function(ev) {
+        ev.date = moment(ev.eventTime, "YYYY-MM-DD hh:mm:ss");
       });
 
-      if(this.month){
+      if (this.month) {
         this.oldMonth = this.month;
-        this.oldMonth.className = 'month out ' + (self.next ? 'next' : 'prev');
-        this.oldMonth.addEventListener('webkitAnimationEnd', function(){
+        this.oldMonth.className = "month out " + (self.next ? "next" : "prev");
+        this.oldMonth.addEventListener("webkitAnimationEnd", function() {
           self.oldMonth.parentNode.removeChild(self.oldMonth);
-          self.month = createElement('div', 'month');
+          self.month = createElement("div", "month");
           self.backFill();
           self.currentMonth();
-          self.forwardFill();
+          self.fowardFill();
           self.el.appendChild(self.month);
-          window.setTimeout(function(){
-            self.month.className = 'month in ' + (self.next ? 'next' : 'prev');
+          window.setTimeout(function() {
+            self.month.className = "month in " + (self.next ? "next" : "prev");
           }, 16);
         });
       } else {
-        this.month = createElement('div', 'month');
+        this.month = createElement("div", "month");
         this.el.appendChild(this.month);
         this.backFill();
         this.currentMonth();
-        this.forwardFill();
-        this.month.className = 'month new';
+        this.fowardFill();
+        this.month.className = "month new";
       }
     };
 
-    Calendar.prototype.backFill = function(){
+    Calendar.prototype.backFill = function() {
       var clone = this.current.clone();
       var dayOfWeek = clone.day();
 
-      if(!dayOfWeek){
+      if (!dayOfWeek) {
         return;
       }
-      clone.subtract('days', dayOfWeek + 1);
 
-      for(var i = dayOfWeek; i > 0; i--){
-        this.drawDay(clone.add('days', 1));
+      clone.subtract("days", dayOfWeek + 1);
+
+      for (var i = dayOfWeek; i > 0; i--) {
+        this.drawDay(clone.add("days", 1));
       }
     };
 
-    Calendar.prototype.forwardFill = function(){
-      var clone = this.current.clone().add('months', 1).subtract('days', 1);
+    Calendar.prototype.fowardFill = function() {
+      var clone = this.current
+        .clone()
+        .add("months", 1)
+        .subtract("days", 1);
       var dayOfWeek = clone.day();
 
-      if(dayOfWeek === 6){
+      if (dayOfWeek === 6) {
         return;
       }
 
-      for(var i = dayOfWeek; i < 6; i++){
-        this.drawDay(clone.add('days', 1));
+      for (var i = dayOfWeek; i < 6; i++) {
+        this.drawDay(clone.add("days", 1));
       }
     };
 
-    Calendar.prototype.currentMonth = function(){
+    Calendar.prototype.currentMonth = function() {
       var clone = this.current.clone();
-      while(clone.month() === this.current.month()){
+
+      while (clone.month() === this.current.month()) {
         this.drawDay(clone);
-        clone.add('days', 1);
+        clone.add("days", 1);
       }
     };
 
-    Calendar.prototype.getWeek = function(day){
-      if(!this.week || day.day() === 0){
-        this.week = createElement('div', 'week');
+    Calendar.prototype.getWeek = function(day) {
+      if (!this.week || day.day() === 0) {
+        this.week = createElement("div", "week");
         this.month.appendChild(this.week);
       }
     };
 
-    Calendar.prototype.drawDay = function(day){
+    Calendar.prototype.drawDay = function(day) {
       var self = this;
       this.getWeek(day);
 
-      var outer = createElement('div', this.getDayClass(day));
-      outer.addEventListener('click', function(){
+      //Outer Day
+      var outer = createElement("div", this.getDayClass(day));
+      outer.addEventListener("click", function() {
         self.openDay(this);
       });
 
-      var name = createElement('day', 'day-name', day.format('ddd'));
-      var number = createElement('div', 'day-number', day.format('DD'));
-      var events = createElement('div', 'day-events');
+      //Day Name
+      var name = createElement("div", "day-name", day.format("ddd"));
+
+      //Day Number
+      var number = createElement("div", "day-number", day.format("DD"));
+
+      //Events
+      var events = createElement("div", "day-events");
       this.drawEvents(day, events);
+
       outer.appendChild(name);
       outer.appendChild(number);
       outer.appendChild(events);
       this.week.appendChild(outer);
     };
 
-    Calendar.prototype.drawEvents = function(day, element){
-      if(day.month() === this.current.month()){
-        var todaysEvents = this.events.reduce(function(memo, ev){
-          if(ev.date.isSame(day, 'day')){
+    Calendar.prototype.drawEvents = function(day, element) {
+      if (day.month() === this.current.month()) {
+        var todaysEvents = this.events.reduce(function(memo, ev) {
+          if (ev.date.isSame(day, "day")) {
             memo.push(ev);
           }
           return memo;
         }, []);
 
-        todaysEvents.forEach(function(ev){
-          var evSpan = createElement('span', ev.color);
+        todaysEvents.forEach(function(ev) {
+          var evSpan = createElement("span", ev.color);
           element.appendChild(evSpan);
         });
       }
     };
 
-    Calendar.prototype.getDayClass = function(day){
-      classes = ['day'];
-      if(day.month() !== this.current.month()){
-        classes.push('other');
-      }else if(today.isSame(day, 'day')){
-        classes.push('today');
+    Calendar.prototype.getDayClass = function(day) {
+      classes = ["day"];
+      if (day.month() !== this.current.month()) {
+        classes.push("other");
+      } else if (today.isSame(day, "day")) {
+        classes.push("today");
       }
-      returnclasses.join(' ');
+      return classes.join(" ");
     };
 
-    Calendar.prototype.openDay = function(el){
+    Calendar.prototype.openDay = function(el) {
       var details, arrow;
-      var dayNumber = +el.querySelectorAll('.day-number')[0].innerText || +el.querySelectorAll('.day-number')[0].textContent;
+      var dayNumber =
+        +el.querySelectorAll(".day-number")[0].innerText ||
+        +el.querySelectorAll(".day-number")[0].textContent;
       var day = this.current.clone().date(dayNumber);
-      var currentOpened = document.querySelector('.details');
 
-      if(currentOpened && currentOpened.parentNode === el.parentNode){
+      var currentOpened = document.querySelector(".details");
+
+      //Check to see if there is an open detais box on the current row
+      if (currentOpened && currentOpened.parentNode === el.parentNode) {
         details = currentOpened;
-        arrow = document.querySelector('.arrow');
-      }else{
-        if(currentOpened){
-          currentOpened.addEventListener('webkitAnimationEnd', function(){
+        arrow = document.querySelector(".arrow");
+      } else {
+        //Close the open events on differnt week row
+        //currentOpened && currentOpened.parentNode.removeChild(currentOpened);
+        if (currentOpened) {
+          currentOpened.addEventListener("webkitAnimationEnd", function() {
             currentOpened.parentNode.removeChild(currentOpened);
           });
-          currentOpened.addEventListener('oanimationend', function(){
+          currentOpened.addEventListener("oanimationend", function() {
             currentOpened.parentNode.removeChild(currentOpened);
           });
-          currentOpened.addEventListener('msAnimationEnd', function(){
+          currentOpened.addEventListener("msAnimationEnd", function() {
             currentOpened.parentNode.removeChild(currentOpened);
           });
-          currentOpened.addEventListener('animationend', function(){
+          currentOpened.addEventListener("animationend", function() {
             currentOpened.parentNode.removeChild(currentOpened);
           });
-          currentOpened.className = 'details out';
+          currentOpened.className = "details out";
         }
 
-        details = createElement('div', 'details in');
-        var arrow = createElement('div', 'arrow');
+        //Create the Details Container
+        details = createElement("div", "details in");
+
+        //Create the arrow
+        var arrow = createElement("div", "arrow");
+
+        //Create the event wrapper
+
         details.appendChild(arrow);
         el.parentNode.appendChild(details);
       }
 
-      var todaysEvents = this.events.reduce(function(memo, ev){
-        if(ev.date.isSame(day, 'day')){
+      var todaysEvents = this.events.reduce(function(memo, ev) {
+        if (ev.date.isSame(day, "day")) {
           memo.push(ev);
         }
         return memo;
       }, []);
 
       this.renderEvents(todaysEvents, details);
-      arrow.style.left = el.offsetLeft - el.parentNode.offsetLeft + 27 + 'px';
+
+      arrow.style.left = el.offsetLeft - el.parentNode.offsetLeft + 27 + "px";
     };
 
-    Calendar.prototype.renderEvents = function(events, ele){
-      var currentWrapper = ele.querySelector('.events');
-      var wrapper = createElement('div', 'events in' + (currentWrapper ? ' new' : ''));
+    Calendar.prototype.renderEvents = function(events, ele) {
+      //Remove any events in the current details element
+      var currentWrapper = ele.querySelector(".events");
+      var wrapper = createElement(
+        "div",
+        "events in" + (currentWrapper ? " new" : "")
+      );
+
       ReactDOM.render(<AddEvent />, wrapper);
 
-      events.forEach(function(ev){
-        var div = createElement('div', 'event');
-        var square = createElement('div', 'event-category ' + ev.color);
-        var span = createElement('span', '', ev.eventName);
+      events.forEach(function(ev) {
+        var div = createElement("div", "event");
+        var square = createElement("div", "event-category " + ev.color);
+        var span = createElement("span", "", ev.eventName);
 
         div.appendChild(square);
         div.appendChild(span);
         wrapper.appendChild(div);
+        //ReactDOM.render(<AddEvent />, wrapper);
       });
 
-      if(!events.length){
-        var div = createElement('div', 'event empty');
-        var span = createElement('span', '', 'No Events');
+      if (!events.length) {
+        var div = createElement("div", "event empty");
+        var span = createElement("span", "", "No Events");
 
         div.appendChild(span);
+        //ReactDOM.render(<AddEvent />, wrapper);
         wrapper.appendChild(div);
       }
 
-      if(currentWrapper){
-        currentWrapper.className = 'events out';
-        currentWrapper.addEventListener('webkitAnimationEnd', function(){
+      if (currentWrapper) {
+        currentWrapper.className = "events out";
+        currentWrapper.addEventListener("webkitAnimationEnd", function() {
           currentWrapper.parentNode.removeChild(currentWrapper);
           ele.appendChild(wrapper);
         });
-        currentWrapper.addEventListener('oanimationend', function(){
+        currentWrapper.addEventListener("oanimationend", function() {
           currentWrapper.parentNode.removeChild(currentWrapper);
           ele.appendChild(wrapper);
         });
-        currentWrapper.addEventListener('msAnimationEnd', function(){
+        currentWrapper.addEventListener("msAnimationEnd", function() {
           currentWrapper.parentNode.removeChild(currentWrapper);
           ele.appendChild(wrapper);
         });
-        currentWrapper.addEventListener('animationend', function(){
+        currentWrapper.addEventListener("animationend", function() {
           currentWrapper.parentNode.removeChild(currentWrapper);
           ele.appendChild(wrapper);
         });
-      }else{
+      } else {
         ele.appendChild(wrapper);
       }
     };
 
-    Calendar.prototype.drawLegend = function(){
-      var legend = createElement('div', 'legend');
-      var calendars = this.events.map(function(e){
-        return e.calendar + '|' + e.color;
-      }).reduce(function(memo, e){
-        if(memo.indexOf(e) === -1){
-          memo.push(e);
-        }
-        return memo;
-      },[]).forEach(function(e){
-        var parts = e.split('|');
-        var entry = createElement('span', 'entry ', + parts[1], parts[0]);
-        legend.appendChild(entry);
-      });
+    Calendar.prototype.drawLegend = function() {
+      var legend = createElement("div", "legend");
+      var calendars = this.events
+        .map(function(e) {
+          return e.calendar + "|" + e.color;
+        })
+        .reduce(function(memo, e) {
+          if (memo.indexOf(e) === -1) {
+            memo.push(e);
+          }
+          return memo;
+        }, [])
+        .forEach(function(e) {
+          var parts = e.split("|");
+          var entry = createElement("span", "entry " + parts[1], parts[0]);
+          legend.appendChild(entry);
+        });
       this.el.appendChild(legend);
     };
 
-    Calendar.prototype.nextMonth = function(){
-      this.current.add('months', 1);
+    Calendar.prototype.nextMonth = function() {
+      this.current.add("months", 1);
       this.next = true;
       this.draw();
     };
 
-    Calendar.prototype.prevMonth = function(){
-      this.current.subtract('months', 1);
+    Calendar.prototype.prevMonth = function() {
+      this.current.subtract("months", 1);
       this.next = false;
       this.draw();
     };
 
     window.Calendar = Calendar;
 
-    function createElement(tagName, className, innerText){
+    function createElement(tagName, className, innerText) {
       var ele = document.createElement(tagName);
-      if(className){
+      if (className) {
         ele.className = className;
       }
-      if(innerText){
+      if (innerText) {
         ele.innderText = ele.textContent = innerText;
       }
       return ele;
     }
 
+    //var data = this.state.data;
     var data = [
       {
-        eventName:'Somethin with you',
-        calendar:'Work',
-        color:'orange',
-        eventTime:'2018-11-25'
+        eventName: "Lunch Meeting w/ Mark",
+        calendar: "Work",
+        color: "orange",
+        eventTime: "2018-09-25 16:47:00"
       },
       {
-        eventName:'Work',
-        calendar:'Gym',
-        color:'blue',
-        eventTime:'2018-11-26'
+        eventName: "Interview - Jr. Web Developer",
+        calendar: "Work",
+        color: "orange",
+        eventTime: "2018-09-2 16:47:00"
       },
       {
-        eventName:'Help',
-        calendar:'Work',
-        color:'red',
-        eventTime:'2018-11-27'
+        eventName: "Demo New App to the Board",
+        calendar: "Work",
+        color: "orange",
+        eventTime: "2018-09-5 16:47:00"
       },
       {
-        eventName:'Travel',
-        calendar:'Work',
-        color:'green',
-        eventTime:'2018-12-08'
+        eventName: "Dinner w/ Marketing",
+        calendar: "Work",
+        color: "orange",
+        eventTime: "2018-09-7 16:47:00"
+      },
+
+      {
+        eventName: "Back & Biceps",
+        calendar: "Gym",
+        color: "blue",
+        eventTime: "2018-09-3 16:47:00"
+      },
+      {
+        eventName: "Chest & Triceps",
+        calendar: "Gym",
+        color: "blue",
+        eventTime: "2018-09-10 16:47:00"
+      },
+      {
+        eventName: "Legs day!",
+        calendar: "Gym",
+        color: "blue",
+        eventTime: "2018-09-20 16:47:00"
+      },
+      {
+        eventName: "Game vs San Degio",
+        calendar: "Gym",
+        color: "blue",
+        eventTime: "2018-09-30 16:47:00"
+      },
+
+      {
+        eventName: "School Play",
+        calendar: "Kids",
+        color: "yellow",
+        eventTime: "2018-09-15 16:47:00"
+      },
+      {
+        eventName: "Parent/Teacher Conference",
+        calendar: "Kids",
+        color: "yellow",
+        eventTime: "2018-09-5 16:47:00"
+      },
+      {
+        eventName: "Pick up from Soccer Practice",
+        calendar: "Kids",
+        color: "yellow",
+        eventTime: "2018-09-17 16:47:00"
+      },
+      {
+        eventName: "Ice Cream Night",
+        calendar: "Kids",
+        color: "yellow",
+        eventTime: "2018-09-1 16:47:00"
+      },
+
+      {
+        eventName: "Free Tamale Night",
+        calendar: "Appt",
+        color: "green",
+        eventTime: "2018-09-23 16:47:00"
+      },
+      {
+        eventName: "Bowling Team",
+        calendar: "Appt",
+        color: "green",
+        eventTime: "2018-09-28 16:47:00"
+      },
+      {
+        eventName: "Teach Kids to Code",
+        calendar: "Appt",
+        color: "green",
+        eventTime: "2018-09-12 16:47:00"
+      },
+      {
+        eventName: "Startup Weekend",
+        calendar: "Appt",
+        color: "green",
+        eventTime: "2018-09-13 16:47:00"
+      },
+
+      {
+        eventName: "Free Tamale Night",
+        calendar: "Other",
+        color: "red",
+        eventTime: "2018-09-23 16:47:00"
+      },
+      {
+        eventName: "Bowling Team",
+        calendar: "Other",
+        color: "red",
+        eventTime: "2018-09-28 16:47:00"
+      },
+      {
+        eventName: "Teach Kids to Code",
+        calendar: "Other",
+        color: "red",
+        eventTime: "2018-09-12 16:47:00"
+      },
+      {
+        eventName: "Startup Weekend",
+        calendar: "Other",
+        color: "red",
+        eventTime: "2018-09-13 16:47:00"
       }
     ];
-    function addDate(ev){}
-    var calendar = new Calendar('#calendar', data);
+
+    function addDate(ev) {}
+
+    var calendar = new Calendar("#calendar", data);
   }
-  render(){
-    return(
+
+  render() {
+    return (
       <div>
-        <div id='calendar' />
+        <div id="calendar" />
       </div>
     );
   }
 }
-
 export default EventCalendar;
