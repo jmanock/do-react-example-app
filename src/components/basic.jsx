@@ -13,22 +13,22 @@ let navigate = {
 }
 
 let events = [
-  {id:1, title:'Food', start:new Date(new Date().setHours(new Date().getHours() -3)), end:new Date(new Date().setHours(new Date().getHours() +3))},
-  {id:2, title:'Sex', start:new Date(new Date().setHours(new Date().getHours() -2)), end:new Date(new Date().setHours(new Date().getHours()-2))}
+  {title:'Fucking Food', start:new Date(moment().add(1,'days')), end:new Date(moment().add(1,'days'))},
+  {title:'Fuckin', start:new Date(moment().add(4, 'days')), end:new Date(moment().add(4,'days'))}
 ];
 
 function Event({event}){
   return(
     <span>
       <strong>{event.title}</strong>
-      {event.desc && ': ' + event.desc}
+
     </span>
   )
 }
 
 class CustomToolbar extends Component{
   render(){
-    let {localizer:{messages}, label} = this.props;
+    let {localizer:{message},label} = this.props;
     return(
       <div className='rbc-toolbar'>
         <span className='rbc-btn-group'>
