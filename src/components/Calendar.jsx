@@ -61,11 +61,12 @@ class Calendar extends Component{
           <div className={`col cell ${!dateFns.isSameMonth(day, monthStart) ? 'disabled' : dateFns.isSameDay(day, selectedDate) ? 'selected' : ''}`} key={day} onClick={() => this.onDateClick(dateFns.parse(cloneDay))}>
             <span className='number'>{formattedDate}</span>
             <span className='bg'>{formattedDate}</span>
+
           </div>
         );
         day = dateFns.addDays(day, 1);
       }
-
+      
       rows.push(
         <div className='row' key={day}>
           {days}
@@ -92,12 +93,16 @@ class Calendar extends Component{
     });
   }
 
+  renderEvents = () => {
+
+  }
   render(){
     return(
       <div className='calendar'>
         {this.renderHeader()}
         {this.renderDays()}
         {this.renderCells()}
+        {this.renderEvents()}
       </div>
     );
   }
