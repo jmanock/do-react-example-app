@@ -1,5 +1,4 @@
 import React from 'react';
-import Calendar from './Calendar';
 import Basic from './basic';
 
 const Events = () =>{
