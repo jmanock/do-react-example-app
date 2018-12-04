@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import moment from 'moment';
 
 const ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
@@ -10,7 +11,7 @@ class Calendar extends Component{
     showEvents:false
   };
 
-  this.initialiseEvents();
+  
 
   previous(){
     const currentMonthView = this.state.selectedMonth;
@@ -207,9 +208,144 @@ class Calendar extends Component{
     if(showEvents){
       return(
         <section className='main-calendar'>
-          
+          <header className='calendar-header'>
+            <div className='row title-header'>
+              {this.renderDayLabel()}
+            </div>
+            <div className='row button-container'>
+              <i className='box arrow fa fa-angle-left' onClick={this.showCalendar} />
+              <i className='box event-button fa fa-plus-square' onClick={this.addEvent} />
+            </div>
+          </header>
+          <Events selectedMonth={this.state.selectedMonth} selectedDay={this.state.selectedDay} selectedMonthEvents={this.state.selectedMonthEvents} removeEvent={i => this.removeEvent(i)} />
         </section>
-      )
+      );
+    }else{
+      return(
+        <section className='main-calendar'>
+          <header className='calendar-header'>
+            <div className='row title-header'>
+              <i className='box arrow fa fa-angle-left' onClick={this.previous} />
+              <div className='box header-text'>
+                {this.renderTodayLabel()}
+                {this.renderMonthLabel()}
+              </div>
+              <i className='box arrow fa fa-angle-right' onClick={this.next} />
+            </div>
+            <DayNames />
+          </header>
+          <div className='days-container'>
+            {this.renderWeeks()}
+          </div>
+        </section>
+      );
     }
   }
 }
+
+class Events extends Component{
+  render(){
+    const currentMonthView = this.props.selectedMonth;
+    const currentSelectedDay = this.props.selectedDay;
+    const monthEvents = this.props.selectdMonthEvents;
+    const removeEvents = this.props.removeEvent;
+    const monthEventsRendered = monthEvents.map((event,i) => {
+      return(
+        <div key={event.title} className='event-container' onClick={() => removeEvent(i)}>
+          <ReactCSSTransitionGroup component='div' className='animated-time' transitionName='time' transitionAppear={true} transitionAppearTimeout={500} transitionEnterTimeout={500} transitionLeaveTimeout={500}>
+            <div className='event-time event-attribute'>
+              {event.date.format('HH:mm')}
+            </div>
+          </ReactCSSTransitionGroup>
+          <ReactCSSTransitionGroup component='div' className='animated-title' transitionName='title' transitionAppear={true} transitionAppearTimeout={500} transitionEnterTimeout={500} transitionLeaveTimeout={500}>
+            <div className='event-title event-attribute'>
+              {event.title}
+            </div>
+          </ReactCSSTransitionGroup>
+        </div>
+      );
+    });
+
+    const dayEventsRendered = [];
+    for(var i = 0; i < monthEventsRendered.length; i++){
+      if(monthEvents[i].date.isSame(currentSelectedDay, 'day')){
+        dayEventsRendered.push(monthEventsRendered[i]);
+      }
+    }
+    return(
+      <div className='day-events'>
+        {dayEventsRendered}
+      </div>
+    );
+  }
+}
+
+class DayNames extends Component{
+  render(){
+    return(
+      <div className='row days-header'>
+        <span className='box day-name'>Mon</span>
+        <span className='box day-name'>Tue</span>
+        <span className='box day-name'>Wed</span>
+        <span className='box day-name'>Thu</span>
+        <span className='box day-name'>Fri</span>
+        <span className='box day-name'>Sat</span>
+        <span className='box day-name'>Sun</span>
+      </div>
+    );
+  }
+}
+
+class Week extends Component{
+  render(){
+    let days = [];
+    let date = this.props.previousCurrentNextView;
+    let currentMonthView = this.props.currentMonthView;
+    let selected = this.props.selected;
+    let select = this.props.select;
+    let monthEvents = this.props.monthEvents;
+
+    for(var i = 0; i < 7; i++){
+      var dayHasEvents = false;
+      for(var j = 0; j < monthEvents.length; j++){
+        if(monthEvents[j].date.isSame(date, 'day')){
+          dayHasEvents = true;
+        }
+      }
+
+      let day = {
+        name:date.format('dd').substring(0,1),
+        number:date.date(),
+        isCurrentMonth:date.month() === currentMonthView.month(),
+        isToday:date.isSame(new Date(), 'day'),
+        date:date,
+        hadEvents:dayHasEvents
+      };
+
+      days.push(<Day day={day} selected={selected} select={select} />);
+      date = date.clone();
+      date.add(1,'d');
+    }
+    return(
+      <div className='row week'>
+        {days}
+      </div>
+    );
+  }
+}
+
+class Day extends Component{
+  render(){
+    let day = this.props.day;
+    let selected = this.props.selected;
+    let select = this.props.select;
+
+    return(
+      <div className={'day' + (day.isToday ? ' today' : '') + (day.isCurrentMonth ? '' : ' different-month') + (day.date.isSame(selected) ? ' selected' : '') + (day.hadEvents ? ' has-events' : '')} onClick={() => select(day)}>
+        <div className='day-number'>{day.number}</div>
+      </div>
+    );
+  }
+}
+
+export default Calendar;
