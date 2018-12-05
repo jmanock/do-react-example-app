@@ -1,7 +1,17 @@
 .App{
-  background-color:#546e7a;
   color:lightgrey;
 }
 .icon{
   cursor:pointer;
+}
+.carImage{
+  width:100%;
+  opacity:.5;
+  position:fixed;
+  z-index:-1;
+  margin-top:-70px;
+}
+.title{
+  color:#b71c1c;
+  z-index:2;
 }
