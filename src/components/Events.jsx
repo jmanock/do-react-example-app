@@ -1,10 +1,10 @@
 import React from 'react';
-import Basic from './basic';
+import Calendar from './Calendar';
 
 const Events = () =>{
   return(
     <div>
-      <Basic />
+      <Calendar />
     </div>
   );
 };

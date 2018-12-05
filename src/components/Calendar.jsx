@@ -1,111 +1,127 @@
 import React, {Component} from 'react';
-import dateFns from 'date-fns';
+import BigCalendar from 'react-big-calendar';
+import './index.css';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+import moment from 'moment';
 
-class Calendar extends Component{
-  state = {
-    currentMonth:new Date(),
-    selectedDate:new Date()
+const localizer = BigCalendar.momentLocalizer(moment);
+
+let navigate = {
+  PREVIOUS:'PREV',
+  NEXT:'NEXT',
+  TODAY:'TODAY',
+  DATE:'DATE'
+}
+
+let events = [
+  {
+    title:'Euro Car',
+    start:new Date(2018,11,4),
+    end:new Date(2018,11,4),
+    bikes:false,
+    cars:true,
+    time:'6pm'
+  },
+  {
+    title:'Ford Night',
+    start:new Date(2018,11,5),
+    end:new Date(2018,11,5),
+    bikes:true,
+    cars:false,
+    time:'6pm'
+  },
+  {
+    title:'Bike Night',
+    start:new Date(2018,11,6),
+    end:new Date(2018,11,6),
+    bikes:false,
+    cars:true,
+    time:'6pm'
+  },
+  {
+    title:'Van Night + 365 Jeep Life',
+    start:new Date(2018,11,7),
+    end:new Date(2018,11,7),
+    cars:false,
+    bikes:false,
+    time:'6pm'
+  },
+  {
+    title:'Corvette Meet',
+    start:new Date(2018,11,10),
+    end:new Date(2018,11,10),
+    cars:true,
+    bikes:false,
+    time:'6pm'
+  },
+  {
+    title:'Paint Night',
+    start:new Date(2018,11,10),
+    end:new Date(2018,11,10),
+    time:'7pm',
+    bikes:false,
+    cars:true
+  },
+  {
+    title:'Festivals of Speed',
+    start:new Date(2018,11,11),
+    end:new Date(2018,11,11),
+    time:'6pm',
+    cars:false,
+    bikes:false
+  },
+  {
+    title:'Mopar Night',
+    start:new Date(2018,11,12),
+    end:new Date(2018,11,12),
+    bikes:true,
+    cars:false,
+    time:'6pm'
+  },
+  {
+    title:'Humble Society Meet',
+    start:new Date(2018,11,12),
+    end:new Date(2018,11,12),
+    cars:true,
+    bikes:false,
+    time:'6pm'
   }
+];
 
-  renderHeader(){
-    const dateFormat = "MMMM YYYY";
-    return(
-      <div className='header row flex-middle'>
-        <div className='col col-start'>
-          <div className='icon' onClick={this.prevMonth}>chevron_left</div>
-        </div>
-        <div className='col col-center'>
-          <span>{dateFns.format(this.state.currentMonth, dateFormat)}</span>
-        </div>
-        <div className='col col-end' onClick={this.nextMonth}>
-          <div className='icon'>chevron_right</div>
-        </div>
-      </div>
-    );
-  }
+function Event({event}){
+  return(
+    <span>
+      <strong className='eventTitle'>{event.title}</strong>
+       <br/>
+      <small className='eventTime'>{event.time}</small>
+    </span>
+  )
+}
 
-  renderDays(){
-    const dateFormat = 'dddd';
-    const days = [];
-
-    let startDate = dateFns.startOfWeek(this.state.currentMonth);
-
-    for(let i = 0; i < 7; i++){
-      days.push(
-        <div className='col col-center' key={i}>
-          {dateFns.format(dateFns.addDays(startDate, i), dateFormat)}
-        </div>
-      );
-    }
-    return <div className='days row'>{days}</div>;
-  }
-
-  renderCells(){
-    const {currentMonth, selectedDate} = this.state;
-    const monthStart = dateFns.startOfMonth(currentMonth);
-    const monthEnd = dateFns.endOfMonth(monthStart);
-    const startDate = dateFns.startOfWeek(monthStart);
-    const endDate = dateFns.endOfWeek(monthEnd);
-    const dateFormat = 'D';
-    const rows = [];
-
-    let days = [];
-    let day = startDate;
-    let formattedDate = '';
-
-    while(day <= endDate){
-      for(let i = 0; i < 7; i++){
-        formattedDate = dateFns.format(day, dateFormat);
-        const cloneDay = day;
-        days.push(
-          <div className={`col cell ${!dateFns.isSameMonth(day, monthStart) ? 'disabled' : dateFns.isSameDay(day, selectedDate) ? 'selected' : ''}`} key={day} onClick={() => this.onDateClick(dateFns.parse(cloneDay))}>
-            <span className='number'>{formattedDate}</span>
-            <span className='bg'>{formattedDate}</span>
-
-          </div>
-        );
-        day = dateFns.addDays(day, 1);
-      }
-      
-      rows.push(
-        <div className='row' key={day}>
-          {days}
-        </div>
-      );
-      days = [];
-    }
-    return <div className='body'>{rows}</div>;
-  }
-
-  onDateClick = day =>{
-
-  }
-
-  nextMonth = () =>{
-    this.setState({
-      currentMonth:dateFns.addMonths(this.state.currentMonth, 1)
-    });
-  }
-
-  prevMonth = () =>{
-    this.setState({
-      currentMonth:dateFns.subMonths(this.state.currentMonth,1)
-    });
-  }
-
-  renderEvents = () => {
-
-  }
+class CustomToolbar extends Component{
   render(){
+    let {localizer:{message},label} = this.props;
     return(
-      <div className='calendar'>
-        {this.renderHeader()}
-        {this.renderDays()}
-        {this.renderCells()}
-        {this.renderEvents()}
+      <div className='rbc-toolbar'>
+        <span className='rbc-btn-group'>
+          <button type='button' onClick={this.navigate.bind(null, navigate.PREVIOUS)} className='icon'>chevron_left</button>
+        </span>
+        <span className='rbc-toolbar-label'>{label}</span>
+        <span className='rbc-btn-group'>
+          <button className='icon' type='button' onClick={this.navigate.bind(null, navigate.NEXT)}>chevron_right</button>
+        </span>
       </div>
-    );
+    )
   }
-};
+  navigate = action =>{
+    this.props.onNavigate(action)
+  }
+}
+
+const Calendar = props =>(
+  <div>
+    <BigCalendar localizer={localizer} events={events} popup startAccessor='start' endAccessor='end' className={props.calendarIsOpen ? 'open' : ''} components={{event:Event, toolbar:CustomToolbar}} style={{height:'700px',marginLeft:'40px',marginTop:'20px', marginRight:'30px'}} eventPropGetter={(event,start,end, isSelected) =>{let newStyle = {backgroundColor:'grey', color:'white'}; if(event.cars){newStyle.backgroundColor='orange'}if(event.bikes){newStyle.backgroundColor='pink'} return{className:'',style:newStyle}}}/>
+  </div>
+)
 
 export default Calendar;

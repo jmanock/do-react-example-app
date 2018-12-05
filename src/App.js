@@ -7,6 +7,7 @@ import Contact from './components/Contact';
 import Cars from './components/Cars';
 import SmallTown from './components/SmallTown';
 import Events from './components/Events';
+import Footer from './components/Footer';
 import {Switch, BrowserRouter, Route} from 'react-router-dom';
 import './App.css';
 
@@ -25,6 +26,7 @@ class App extends Component {
             <Route path='/SmallTown' component={SmallTown} />
             <Route path='/Events' component={Events} />
           </Switch>
+          <Footer />
         </div>
       </BrowserRouter>
     );

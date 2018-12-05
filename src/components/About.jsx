@@ -1,8 +1,15 @@
 import React from 'react';
+import './index.css';
 
 const About = () =>{
   return(
     <div className='container'>
+      <p>
+        CycleFeverTv is a motorcycle travel show with crazy hosts who want you to come along for the ride while they have some fun and a few laughs! Join the Adventure and Enjoy the Ride! Follow us on our motorcycle travel adventures.
+      </p>
+      <p>
+        Motorcycles, cars, travel, live events, and live concerts! Episodes of Cycle Fever TV live stream from Ace Cafe evey Thursday @ 7:30pm EST sharp! Our history in 1999, two public school teachers set out to re-discover the American road. With their wives permission of course. Cycle Fever TV takes a ride across the country from the unique view of a motorcycle. Join our host, Hank Knapp and friends as they travel all around the highways and backroads of The United States experiencing motorcycle culture.
+      </p>
       <div>
         <h1>Hank</h1>
         <p>
