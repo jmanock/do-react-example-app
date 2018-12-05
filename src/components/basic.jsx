@@ -94,11 +94,11 @@ class CustomToolbar extends Component{
     return(
       <div className='rbc-toolbar'>
         <span className='rbc-btn-group'>
-          <button type='button' onClick={this.navigate.bind(null, navigate.PREVIOUS)}>Prev</button>
+          <button type='button' onClick={this.navigate.bind(null, navigate.PREVIOUS)} className='icon'>chevron_left</button>
         </span>
         <span className='rbc-toolbar-label'>{label}</span>
         <span className='rbc-btn-group'>
-          <button type='button' onClick={this.navigate.bind(null, navigate.NEXT)}>Next</button>
+          <button className='icon' type='button' onClick={this.navigate.bind(null, navigate.NEXT)}>chevron_right</button>
         </span>
       </div>
     )
@@ -110,7 +110,7 @@ class CustomToolbar extends Component{
 
 const Calendar = props =>(
   <div>
-    <BigCalendar localizer={localizer} events={events} popup startAccessor='start' endAccessor='end' className={props.calendarIsOpen ? 'open' : ''} components={{event:Event, toolbar:CustomToolbar}} style={{height:'500px',width:'100%'}} eventPropGetter={(event,start,end, isSelected) =>{let newStyle = {backgroundColor:'grey', color:'white'}; if(event.isMine){newStyle.backgroundColor='orange'} return{className:'',style:newStyle}}}/>
+    <BigCalendar localizer={localizer} events={events} popup startAccessor='start' endAccessor='end' className={props.calendarIsOpen ? 'open' : ''} components={{event:Event, toolbar:CustomToolbar}} style={{height:'700px',marginLeft:'40px',marginTop:'20px', marginRight:'30px'}} eventPropGetter={(event,start,end, isSelected) =>{let newStyle = {backgroundColor:'grey', color:'white'}; if(event.isMine){newStyle.backgroundColor='orange'} return{className:'',style:newStyle}}}/>
   </div>
 )
 

@@ -3,7 +3,7 @@ import Basic from './basic';
 
 const Events = () =>{
   return(
-    <div className='container'>
+    <div>
       <Basic />
     </div>
   );
