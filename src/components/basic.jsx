@@ -13,15 +13,77 @@ let navigate = {
 }
 
 let events = [
-  {title:'Fucking Food', start:new Date(moment().add(1,'days')), end:new Date(moment().add(1,'days'))},
-  {title:'Fuckin', start:new Date(moment().add(4, 'days')), end:new Date(moment().add(4,'days'))}
+  {
+    title:'Euro Car',
+    start:new Date(2018,11,4),
+    end:new Date(2018,11,4),
+    isMine:true,
+    time:'6pm'
+  },
+  {
+    title:'Ford Night',
+    start:new Date(2018,11,5),
+    end:new Date(2018,11,5),
+    isMine:false,
+    time:'6pm'
+  },
+  {
+    title:'Bike Night',
+    start:new Date(2018,11,6),
+    end:new Date(2018,11,6),
+    isMine:false,
+    time:'6pm'
+  },
+  {
+    title:'Van Night + 365 Jeep Life',
+    start:new Date(2018,11,7),
+    end:new Date(2018,11,7),
+    isMine:true,
+    time:'6pm'
+  },
+  {
+    title:'Corvette Meet',
+    start:new Date(2018,11,10),
+    end:new Date(2018,11,10),
+    isMine:false,
+    time:'6pm'
+  },
+  {
+    title:'Paint Night',
+    start:new Date(2018,11,10),
+    end:new Date(2018,11,10),
+    time:'7pm',
+    isMine:true
+  },
+  {
+    title:'Festivals of Speed',
+    start:new Date(2018,11,11),
+    end:new Date(2018,11,11),
+    time:'6pm',
+    isMine:false
+  },
+  {
+    title:'Mopar Night',
+    start:new Date(2018,11,12),
+    end:new Date(2018,11,12),
+    isMine:true,
+    time:'6pm'
+  },
+  {
+    title:'Humble Society Meet',
+    start:new Date(2018,11,12),
+    end:new Date(2018,11,12),
+    isMine:false,
+    time:'6pm'
+  }
 ];
 
 function Event({event}){
   return(
     <span>
-      <strong>{event.title}</strong>
-
+      <strong className='eventTitle'>{event.title}</strong>
+       <br/>
+      <small className='eventTime'>{event.time}</small>
     </span>
   )
 }
@@ -48,7 +110,7 @@ class CustomToolbar extends Component{
 
 const Calendar = props =>(
   <div>
-    <BigCalendar localizer={localizer} events={events} popup startAccessor='start' endAccessor='end' className={props.calendarIsOpen ? 'open' : ''} components={{event:Event, toolbar:CustomToolbar}} style={{height:'500px'}}/>
+    <BigCalendar localizer={localizer} events={events} popup startAccessor='start' endAccessor='end' className={props.calendarIsOpen ? 'open' : ''} components={{event:Event, toolbar:CustomToolbar}} style={{height:'500px',width:'100%'}} eventPropGetter={(event,start,end, isSelected) =>{let newStyle = {backgroundColor:'grey', color:'white'}; if(event.isMine){newStyle.backgroundColor='orange'} return{className:'',style:newStyle}}}/>
   </div>
 )
 
