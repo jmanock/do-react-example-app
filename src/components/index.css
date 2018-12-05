@@ -25,8 +25,15 @@ li{
   height:100vh;
 }
 .cars{
-  background-color:lightgray;
+  background:url('../images/classic.jpg');
   height:50vh;
+  -webkit-background-size:cover;
+  -moz-background-size:cover;
+  -o-background-size:cover;
+  background-size:cover;
+  background-attachment:fixed;
+  position:relative;
+  overflow:hidden;
 }
 .bikes{
   background:url('../images/cycle.png') no-repeat center fixed;
@@ -41,7 +48,7 @@ li{
   overflow:hidden;
 }
 h1{
-  margin-top:110px;
+  margin-top:150px;
   text-align:center;
   font-weight:300;
   color:darkred;

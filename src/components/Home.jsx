@@ -9,23 +9,9 @@ const Home = () =>{
       <section className='cars'>
         <div className='row'>
           <div className='col s6'>
-            <h3>OFFERING VALUE CFTV</h3>
-            <ul className='center'>
-              <li><a href=''>Cycle Fever Tv</a></li>
-              <li><a href=''>Cars Tv</a></li>
-              <li><a href=''>Small Town America Tv</a></li>
-              <li><a href=''>Rolling Media Channel</a></li>
-            </ul>
+            <h3 style={{backgroundColor:'lightgrey'}}>OFFERING VALUE CFTB</h3>
           </div>
-          <div className='col s6'>
-            <h3>AGENDA</h3>
-            <ul className='center'>
-              <li><a href=''>What We Do and Why?</a></li>
-              <li><a href=''>The Big Picture</a></li>
-              <li><a href=''>The Journey There...</a></li>
-              <li><a href=''>How you can Join Us</a></li>
-            </ul>
-          </div>
+          <div className='col s6'></div>
         </div>
       </section>
       <section className='bikes'>
