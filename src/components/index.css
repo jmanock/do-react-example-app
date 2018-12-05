@@ -4,14 +4,55 @@
 .icon{
   cursor:pointer;
 }
-.carImage{
-  width:100%;
-  opacity:.5;
-  position:fixed;
-  z-index:-1;
-  margin-top:-70px;
-}
 .title{
   color:#b71c1c;
   z-index:2;
+  text-align:center;
+}
+li{
+  color:#546e7a;
+}
+.intro{
+  background:url('../images/car.jpg') no-repeat center fixed;
+  -webkit-background-size:cover;
+  -moz-background-size:cover;
+  -o-background-size:cover;
+  background-color:#1c120c;
+  background-size:cover;
+  background-attachment:fixed;
+  position:relative;
+  overflow:hidden;
+  height:100vh;
+}
+.cars{
+  background-color:lightgray;
+  height:50vh;
+}
+.bikes{
+  background:url('../images/cycle.png') no-repeat center fixed;
+  height:50vh;
+  -webkit-background-size:cover;
+  -moz-background-size:cover;
+  -o-background-size:cover;
+  background-size:cover;
+  background-color:#1c120c;
+  background-attachment:fixed;
+  position:relative;
+  overflow:hidden;
+}
+h1{
+  margin-top:110px;
+  text-align:center;
+  font-weight:300;
+  color:darkred;
+}
+h3{
+  text-align:center;
+  font-weight:300;
+  color:darkred;
+  margin-top:0px;
+}
+.wwdaw{
+  background-color:lightgrey;
+  height:50vh;
 }
