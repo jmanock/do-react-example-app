@@ -59,6 +59,18 @@ li{
   position:relative;
   overflow:hidden;
 }
+.motovation{
+  background:url('../images/motocycle.jpg') no-repeat center fixed;
+  height:50vh;
+  -webkit-background-size:cover;
+  -moz-background-size:cover;
+  -o-background-size:cover;
+  background-size:cover;
+  background-color:#1c120c;
+  background-attachment:fixed;
+  position:relative;
+  overflow:hidden;
+}
 .welcome{
   margin-top:150px;
   text-align:center;
@@ -68,7 +80,7 @@ li{
 .wwdawTitle{
   text-align:center;
   color:darkred;
-  font-weight:200;
+  font-weight:300;
   margin-top:100px;
 }
 h3{
@@ -92,4 +104,7 @@ h3{
 .list{
   list-style-type:none;
   margin-top:50px;
+}
+ul{
+  list-style-type:none;
 }
