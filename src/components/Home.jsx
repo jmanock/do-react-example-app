@@ -10,7 +10,7 @@ const Home = () =>{
 
       <section className='cars'>
         <div className='row'>
-          <div className='col s6' style={{backgroundColor:'lightgrey', height:'50vh'}}>
+          <div className='col s6' style={{backgroundColor:'#c62828', height:'50vh'}}>
             <h3 style={{marginTop:'20px'}}>OFFERING VALUE <br/><span style={{color:'#333',fontWeight:'bold'}}>CFTV</span></h3>
             <ul className=''>
               <li>Cycle Fever Tv</li>
@@ -26,7 +26,7 @@ const Home = () =>{
       <section className='agenda'>
         <div className='row'>
           <div className='col s6'></div>
-          <div className='col s6' style={{backgroundColor:'lightgrey', height:'50vh'}}>
+          <div className='col s6' style={{backgroundColor:'#9e9e9e', height:'50vh'}}>
             <h3 style={{marginTop:'20px'}}>AGENDA</h3>
             <ol className=''>
               <li>What We Do, and Why?</li>

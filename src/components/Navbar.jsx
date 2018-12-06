@@ -3,9 +3,9 @@ import {Link, withRouter} from 'react-router-dom';
 
 const Navbar = () =>{
   return(
-    <nav className='nav-wrapper blue-grey darken-3'>
+    <nav className='nav-wrapper grey darken-2'>
       <div className='container'>
-        <span className='brand-logo'><Link to='/'>C.F. Tv</Link></span>
+        <span className='brand-logo'><Link to='/'>CF Tv</Link></span>
         <ul className='right'>
           <li><Link to='/About'>About Us</Link></li>
           <li><Link to='/Contact'>Contact</Link></li>
