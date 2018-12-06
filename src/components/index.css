@@ -47,11 +47,29 @@ li{
   position:relative;
   overflow:hidden;
 }
-h1{
+.agenda{
+  background:url('../images/fastCar.jpg') no-repeat center fixed;
+  height:50vh;
+  -webkit-background-size:cover;
+  -moz-background-size:cover;
+  -o-background-size:cover;
+  background-size:cover;
+  background-color:#1c120c;
+  background-attachment:fixed;
+  position:relative;
+  overflow:hidden;
+}
+.welcome{
   margin-top:150px;
   text-align:center;
   font-weight:300;
   color:darkred;
+}
+.wwdawTitle{
+  text-align:center;
+  color:darkred;
+  font-weight:200;
+  margin-top:100px;
 }
 h3{
   text-align:center;
@@ -62,4 +80,8 @@ h3{
 .wwdaw{
   background-color:lightgrey;
   height:50vh;
+}
+.pepper{
+  width:50%;
+  margin-top:40px;
 }
