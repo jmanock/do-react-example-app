@@ -3,7 +3,7 @@ import {Link, withRouter} from 'react-router-dom';
 
 const Navbar = () =>{
   return(
-    <nav className='nav-wrapper grey darken-2'>
+    <nav className='nav-wrapper blue-grey darken-4'>
       <div className='container'>
         <span className='brand-logo'><Link to='/'>CF Tv</Link></span>
         <ul className='right'>
@@ -14,6 +14,7 @@ const Navbar = () =>{
           <li><Link to='/SmallTown'>Small Town</Link></li>
           <li><Link to='/Events'>Events</Link></li>
         </ul>
+        
       </div>
     </nav>
   );

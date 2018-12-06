@@ -5,12 +5,16 @@ const Home = () =>{
   return(
     <div>
       <section className='intro'>
-        <h1 className='welcome'><span style={{color:'white'}}>Welcome to</span> <br /><strong>CF Tv</strong></h1>
+        <div className='title'>
+          <h1 className='bcr center-align'>Bikes, Cars, &amp; Rock N Roll</h1>
+          <h1 className='welcome center-align'>CF Tv</h1>
+          <h1 className='adv center-align'>Join the Adventure &amp; Enjoy the Ride.</h1>
+        </div>
       </section>
 
       <section className='cars'>
         <div className='row'>
-          <div className='col s6' style={{backgroundColor:'#c62828', height:'50vh'}}>
+          <div className='col s6' style={{backgroundColor:'#757575', height:'50vh'}}>
             <h3 style={{marginTop:'20px'}}>OFFERING VALUE <br/><span style={{color:'#333',fontWeight:'bold'}}>CFTV</span></h3>
             <ul className=''>
               <li>Cycle Fever Tv</li>
@@ -26,7 +30,7 @@ const Home = () =>{
       <section className='agenda'>
         <div className='row'>
           <div className='col s6'></div>
-          <div className='col s6' style={{backgroundColor:'#9e9e9e', height:'50vh'}}>
+          <div className='col s6' style={{backgroundColor:'#616161', height:'50vh'}}>
             <h3 style={{marginTop:'20px'}}>AGENDA</h3>
             <ol className=''>
               <li>What We Do, and Why?</li>
@@ -61,7 +65,7 @@ const Home = () =>{
 
       <section className='motovation'>
         <div className='row'>
-          <div className='col s6' style={{height:'50vh', backgroundColor:'lightgrey'}}>
+          <div className='col s6' style={{height:'50vh', backgroundColor:'#757575'}}>
             <h3>What Motivates us?</h3>
             <ul>
               <li>We have over 40 years of TB Production and presenting experience</li>
