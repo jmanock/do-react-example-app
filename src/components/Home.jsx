@@ -46,12 +46,15 @@ const Home = () =>{
         <div className='row'>
           <div className='col s4'>
             <img src={greenPepper} alt='pepper1' className='pepper'></img>
+            <ol className='list'><li>Provide local resource information in a video magazine format</li></ol>
           </div>
           <div className='col s4'>
             <img src={greenPepper} alt='pepper2' className='pepper'></img>
+            <ol className='list'><li>Provide a platform to advertise produces, events and locations to a key known audience</li></ol>
           </div>
           <div className='col s4'>
             <img src={greenPepper} alt='pepper3' className='pepper'></img>
+            <ol className='list'><li>create partnerships with key companies who have a shared ethos</li><li>In the Future, we will bring on more platforms and more outlets to bring the message to a greater audience</li></ol>
           </div>
         </div>
       </section>

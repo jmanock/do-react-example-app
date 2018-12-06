@@ -85,3 +85,11 @@ h3{
   width:50%;
   margin-top:40px;
 }
+.list li:before{
+  content:'\1f336';
+  margin-left:-20px;
+}
+.list{
+  list-style-type:none;
+  margin-top:50px;
+}
