@@ -14,7 +14,7 @@ const Home = () =>{
 
       <section className='cars'>
         <div className='row'>
-          <div className='col s6' style={{backgroundColor:'#757575', height:'50vh'}}>
+          <div className='col s6 test' style={{backgroundColor:'#757575', height:'50vh'}}>
             <h3 style={{marginTop:'20px'}}>OFFERING VALUE <br/><span style={{color:'#333',fontWeight:'bold'}}>CFTV</span></h3>
             <ul className=''>
               <li>Cycle Fever Tv</li>
@@ -23,6 +23,7 @@ const Home = () =>{
               <li>Rolling Media Channel</li>
             </ul>
           </div>
+          <div className='triangle-up'></div>
           <div className='col s6'></div>
         </div>
       </section>
@@ -76,6 +77,12 @@ const Home = () =>{
               <li>We are building on our following: Viewers, Followers, Fans</li>
             </ul>
           </div>
+          <div className='col s6'></div>
+        </div>
+      </section>
+      <section className='structure'>
+        <div className='row'>
+          <div className='col s6'></div>
           <div className='col s6'></div>
         </div>
       </section>

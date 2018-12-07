@@ -4,21 +4,17 @@
 .icon{
   cursor:pointer;
 }
-.title{
-  color:#b71c1c;
-  z-index:2;
-  text-align:center;
-}
 .welcome{
-  font-size:5em;
-  color:darkred;
+  font-size:6em;
+  font-weight:bold;
+  color:#b71c1c;
 }
 .bcr{
   color:white;
   font-size:2em;
 }
 .adv{
-  color:blue;
+  color:#82b1ff;
   font-size:1.5em;
 }
 .title{
@@ -110,4 +106,12 @@ h3{
 .list{
   list-style-type:none;
   margin-top:50px;
+}
+.triangle-up{
+  width:0;
+  height:0;
+  border-left:135px solid #757575;
+  border-bottom:225px solid transparent;
+  border-top:135px solid transparent;
+  float:left;
 }
