@@ -119,6 +119,8 @@ h3{
   height:50vh;
 }
 .cftvSign{
+  border:1px solid pink;
+  width:50px;
   background-color:red;
   writing-mode:vertical-lr;
   text-orientation:mixed;
@@ -127,4 +129,16 @@ h3{
 }
 .cftvSign > h3{
   color:white;
+}
+.something{
+  background-color:orange;
+  height:50vh;
+}
+.s1{
+  color:white;
+  border:1px solid green;
+}
+.s3{
+  color:white;
+  border:1px solid black;
 }

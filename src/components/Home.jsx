@@ -1,5 +1,6 @@
 import React from 'react';
 import greenPepper from '../images/greenPepppercopy.png';
+import {Row, Col} from 'react-materialize';
 
 const Home = () =>{
   return(
@@ -80,34 +81,30 @@ const Home = () =>{
           <div className='col s6'></div>
         </div>
       </section>
+
       <section className='structure'>
         <div className='row'>
-          <div className='col s1'>
-            <div className='cftvSign'>
-              <h3>CFTV</h3>
-            </div>
-          </div>
-          <div className='col s5'>
-            <div className='channels'>
-              <h4>Cycle Fever TV</h4>
-              <h4>Porsche TV</h4>
-              <h4>Small Town America Tv</h4>
-            </div>
-          </div>
-          <div className='col s6'>
-            <div className='structureList'>
-              <ul>
-                <li>Events - Rides, Meetup, Dealerships</li>
-                <li>Locations - Where to go What to do</li>
-                <li>Interviews - who is who and what they do</li>
-                <li>Trips - Document day trips of interest</li>
-                <li>Holidays - Document Holidays and Things to do</li>
-                <li>Tricks and Tips - From clubs of sponsors</li>
-                <li>Endorse Products - Sponsor products</li>
-                <li>Rolling Media Channel - Includes All the Above</li>
-              </ul>
-            </div>
-          </div>
+          <div className='col s1'></div>
+        </div>
+        <div className='cftvSign'>
+          <h3>CFTV</h3>
+        </div>
+        <div className='channels'>
+          <h4>Cycle Fever TV</h4>
+          <h4>Porsche TV</h4>
+          <h4>Small Town America Tv</h4>
+        </div>
+        <div className='structureList'>
+          <ul>
+            <li>Events - Rides, Meetup, Dealerships</li>
+            <li>Locations - Where to go What to do</li>
+            <li>Interviews - who is who and what they do</li>
+            <li>Trips - Document day trips of interest</li>
+            <li>Holidays - Document Holidays and Things to do</li>
+            <li>Tricks and Tips - From clubs of sponsors</li>
+            <li>Endorse Products - Sponsor products</li>
+            <li>Rolling Media Channel - Includes All the Above</li>
+          </ul>
         </div>
       </section>
     </div>
