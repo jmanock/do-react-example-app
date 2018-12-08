@@ -81,30 +81,36 @@ const Home = () =>{
           <div className='col s6'></div>
         </div>
       </section>
-
+      <Row>
+        <Col s={5} m={5} l={5} xl={5}>5</Col>
+        <Col s={7} m={7} l={7} xl={7}>7</Col>
+      </Row>
       <section className='structure'>
         <div className='row'>
-          <div className='col s1'></div>
-        </div>
-        <div className='cftvSign'>
-          <h3>CFTV</h3>
-        </div>
-        <div className='channels'>
-          <h4>Cycle Fever TV</h4>
-          <h4>Porsche TV</h4>
-          <h4>Small Town America Tv</h4>
-        </div>
-        <div className='structureList'>
-          <ul>
-            <li>Events - Rides, Meetup, Dealerships</li>
-            <li>Locations - Where to go What to do</li>
-            <li>Interviews - who is who and what they do</li>
-            <li>Trips - Document day trips of interest</li>
-            <li>Holidays - Document Holidays and Things to do</li>
-            <li>Tricks and Tips - From clubs of sponsors</li>
-            <li>Endorse Products - Sponsor products</li>
-            <li>Rolling Media Channel - Includes All the Above</li>
-          </ul>
+          <div className='s6 m6 l6'>
+            <div className='cftvSign'>
+              <h3>CFTV</h3>
+            </div>
+            <ul>
+              <li>Cycle Fever Tv</li>
+              <li>Porsche Tv</li>
+              <li>Small Town America Tv</li>
+            </ul>
+          </div>
+          <div className='s6 m6 l6'>
+            <div className='structureList'>
+              <ul>
+                <li>Events - Rides, Meetup, Dealerships</li>
+                <li>Locations - Where to go What to do</li>
+                <li>Interviews - who is who and what they do</li>
+                <li>Trips - Document day trips of interest</li>
+                <li>Holidays - Document Holidays and Things to do</li>
+                <li>Tricks and Tips - From clubs of sponsors</li>
+                <li>Endorse Products - Sponsor products</li>
+                <li>Rolling Media Channel - Includes All the Above</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
     </div>
