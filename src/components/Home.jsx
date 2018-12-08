@@ -81,15 +81,19 @@ const Home = () =>{
           <div className='col s6'></div>
         </div>
       </section>
-      <Row>
-        <Col s={5} m={5} l={5} xl={5}>5</Col>
-        <Col s={7} m={7} l={7} xl={7}>7</Col>
-      </Row>
+      <section style={{backgroundColor:'green'}}>
+        <Row>
+          <Col l={1} s={1} m={1} xl={1} className='white'>1</Col>
+          <Col l={4} className='green'>3</Col>
+          <Col className='orange' l={4}>3</Col>
+          <Col className='pink' l={3}>3</Col>
+        </Row>
+      </section>
       <section className='structure'>
         <div className='cftvSign'>
           <h3>CFTV</h3>
         </div>
-        
+
       </section>
     </div>
   );
